@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #17201D;
+    background-color: #F8F5EC;
+  }
+
+  h1, h2, h3, h4, .font-serif-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+.hero-heading {
+  font-size: clamp(3rem, 6.5vw, 6.5rem);
+  line-height: 1.05;
+}
+
+.section-heading {
+  font-size: clamp(2.25rem, 4.5vw, 4.5rem);
+  line-height: 1.1;
+}
+
+.sub-heading {
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  line-height: 1.2;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F5EC;
+}
+::-webkit-scrollbar-thumb {
+  background: #173F36;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C98B32;
+}
