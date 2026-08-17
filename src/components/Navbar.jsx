@@ -5,11 +5,24 @@ import { Menu, X, Calendar, Phone, ArrowUpRight } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPastHero, setIsPastHero] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  const isHomePage = location.pathname === '/';
+
   useEffect(() => {
     const handleScroll = () => {
+      const heroHeight = window.innerHeight;
+      
+      // Track scrolled past hero
+      if (window.scrollY >= heroHeight * 0.75) {
+        setIsPastHero(true);
+      } else {
+        setIsPastHero(false);
+      }
+
+      // Track compact background padding
       if (window.scrollY > 30) {
         setIsScrolled(true);
       } else {
@@ -17,9 +30,10 @@ export default function Navbar() {
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location]);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -34,10 +48,17 @@ export default function Navbar() {
     { name: 'CONTACT', path: '/contact' }
   ];
 
+  // Show CILANTREE Navbar on non-home pages OR after scrolling past Hero on home page
+  const showNavbar = !isHomePage || isPastHero;
+
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          showNavbar
+            ? 'translate-y-0 opacity-100 pointer-events-auto'
+            : '-translate-y-full opacity-0 pointer-events-none'
+        } ${
           isScrolled
             ? 'bg-[#F8F5EC]/95 backdrop-blur-md py-4 shadow-sm border-b border-[#E8E0CF]'
             : 'bg-[#F8F5EC] py-6 border-b border-[#E8E0CF]/60'

@@ -68,10 +68,26 @@ const dishes = [
 export default function MaharajaHero() {
   const [activeState, setActiveState] = useState(0);
   const [rotationAngle, setRotationAngle] = useState(0);
+  const [showHeroNav, setShowHeroNav] = useState(true);
   const reqRef = useRef(null);
   const lastTimeRef = useRef(null);
 
-  // 1. Continuous rotation loop that NEVER resets or snaps orientation
+  // 1. Scroll listener to hide Hero navbar when scrolling down past Hero
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroHeight = window.innerHeight;
+      if (window.scrollY > heroHeight * 0.4) {
+        setShowHeroNav(false);
+      } else {
+        setShowHeroNav(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // 2. Continuous rotation loop that NEVER resets or snaps orientation
   useEffect(() => {
     const updateRotation = (time) => {
       if (lastTimeRef.current !== null) {
@@ -89,7 +105,7 @@ export default function MaharajaHero() {
     };
   }, []);
 
-  // 2. Pure automatic state transition timer for clockwise carousel (Un-manipulable)
+  // 3. Pure automatic state transition timer for clockwise carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveState((prev) => (prev + 1) % 4);
@@ -200,15 +216,19 @@ export default function MaharajaHero() {
         </motion.div>
       </AnimatePresence>
 
-      {/* LAYER 4: Fixed Header / Navigation (Z-Index 50 - Interactive) */}
-      <header className="absolute top-0 left-0 right-0 z-50 px-8 md:px-16 py-8 flex items-center justify-between pointer-events-auto">
-        {/* Top-Left Restaurant Logo Wordmark */}
+      {/* LAYER 4: Fixed Header / Navigation (Appears only when viewing Hero section) */}
+      <header
+        className={`absolute top-0 left-0 right-0 z-50 px-8 md:px-16 py-8 flex items-center justify-between transition-all duration-500 ${
+          showHeroNav ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+        }`}
+      >
+        {/* Top-Left Restaurant Logo Wordmark: CILANTREE Indian Fine Dining */}
         <Link to="/" className="flex flex-col group focus:outline-none">
           <span className="font-serif text-3xl md:text-4xl font-bold tracking-[0.25em] text-[#FFFDF7] group-hover:text-[#F5A623] transition-colors duration-300">
-            MAHARAJA
+            CILANTREE
           </span>
           <span className="text-[10px] tracking-[0.4em] font-semibold text-[#F5A623] uppercase -mt-1">
-            ROYAL INDIAN CUISINE
+            INDIAN FINE DINING
           </span>
         </Link>
 
@@ -255,7 +275,7 @@ export default function MaharajaHero() {
         </AnimatePresence>
       </div>
 
-      {/* LAYER 3: Four-Dish Clockwise Carousel System (Pure Automatic Animation - Pointer Events Disabled) */}
+      {/* LAYER 3: Four-Dish Clockwise Carousel System */}
       <div className="absolute inset-0 z-20 overflow-hidden pointer-events-none">
         {dishes.map((dish, dishIndex) => {
           const style = getDishPositionStyle(dishIndex);
