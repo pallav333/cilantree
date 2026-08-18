@@ -11,57 +11,33 @@ const dishes = [
     id: 'biryani',
     name: 'Hyderabadi Chicken Biryani',
     subtitle: 'Aromatic long-grain basmati, saffron rice, tender chicken, fried onions & mint leaves',
-    bgColor: '#B84A17', // Rich Saffron Terracotta
     accentColor: '#F5A623',
     image: '/biryani.png',
-    spices: [
-      { name: 'Star Anise', icon: '★', top: '22%', left: '15%', size: 'text-2xl' },
-      { name: 'Cardamom', icon: '♠', top: '35%', right: '18%', size: 'text-xl' },
-      { name: 'Cinnamon', icon: '❚', top: '70%', left: '20%', size: 'text-3xl' },
-      { name: 'Saffron', icon: '✹', top: '65%', right: '22%', size: 'text-2xl' }
-    ]
+    bgImage: '/biryani_background.png'
   },
   {
     id: 'chicken-noodles',
     name: 'Wok Chicken Noodles',
     subtitle: 'Stir-fried noodle strands tossed with chicken strips, scallions, chili & sesame seeds',
-    bgColor: '#731811', // Deep Crimson Chili Red
     accentColor: '#FF6B59',
     image: '/noodles.png',
-    spices: [
-      { name: 'Chili Flakes', icon: '🔥', top: '24%', left: '16%', size: 'text-2xl' },
-      { name: 'Garlic', icon: '🧄', top: '36%', right: '19%', size: 'text-2xl' },
-      { name: 'Spring Onion', icon: '🌿', top: '70%', left: '24%', size: 'text-2xl' },
-      { name: 'Pepper', icon: '✹', top: '64%', right: '20%', size: 'text-xl' }
-    ]
+    bgImage: '/noodles_background.png'
   },
   {
     id: 'masala-dosa',
     name: 'Golden Masala Dosa',
     subtitle: 'Crisp golden crepe, yellow potato masala, creamy coconut chutney & rich sambar',
-    bgColor: '#9C6E19', // Golden Turmeric / Amber
     accentColor: '#F7D070',
     image: '/masala dosa.png',
-    spices: [
-      { name: 'Curry Leaf', icon: '🍃', top: '20%', left: '20%', size: 'text-2xl' },
-      { name: 'Mustard Seed', icon: '•', top: '38%', right: '20%', size: 'text-3xl' },
-      { name: 'Red Chili', icon: '🌶', top: '68%', left: '18%', size: 'text-2xl' },
-      { name: 'Coconut', icon: '🥥', top: '62%', right: '18%', size: 'text-2xl' }
-    ]
+    bgImage: '/masala_dosa_background.png'
   },
   {
     id: 'fried-rice',
     name: 'Chicken Fried Rice',
     subtitle: 'Wok-fried golden rice with diced carrots, green peas, scallions & scrambled egg',
-    bgColor: '#1B3F2C', // Deep Herb Green
     accentColor: '#4EBA6F',
     image: '/fried rice.png',
-    spices: [
-      { name: 'Chili', icon: '🌶', top: '25%', left: '18%', size: 'text-2xl' },
-      { name: 'Spring Onion', icon: '🌿', top: '40%', right: '16%', size: 'text-2xl' },
-      { name: 'Sesame', icon: '░', top: '72%', left: '22%', size: 'text-xl' },
-      { name: 'Coriander', icon: '☘', top: '60%', right: '25%', size: 'text-2xl' }
-    ]
+    bgImage: '/fried_rice_background.png'
   }
 ];
 
@@ -163,58 +139,29 @@ export default function MaharajaHero() {
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[100vh] overflow-hidden select-none font-sans">
-      {/* LAYER 1: Full-Screen Solid Background Color Crossfade */}
-      <AnimatePresence mode="wait">
+    <section className="relative w-full h-screen min-h-[100vh] overflow-hidden select-none font-sans bg-[#173F36]">
+      {/* LAYER 1: Full-Screen Background Image with Instant Simultaneous Crossfade */}
+      <AnimatePresence>
         <motion.div
           key={activeDish.id + '-bg'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-          style={{ backgroundColor: activeDish.bgColor }}
-          className="absolute inset-0 z-0"
-        />
-      </AnimatePresence>
-
-      {/* LAYER 2: Food-specific Background Decorations & Spices */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeDish.id + '-spices'}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.05 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0 z-10 pointer-events-none"
+          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+          className="absolute inset-0 z-0 overflow-hidden"
         >
-          {activeDish.spices.map((spice, idx) => (
-            <motion.div
-              key={idx}
-              animate={{
-                y: [0, -10, 0],
-                rotate: [0, 8, -8, 0]
-              }}
-              transition={{
-                duration: 6 + idx * 2,
-                repeat: Infinity,
-                ease: 'easeInOut'
-              }}
-              style={{
-                position: 'absolute',
-                top: spice.top,
-                left: spice.left,
-                right: spice.right
-              }}
-              className={`${spice.size} text-white/20 font-serif drop-shadow-md`}
-            >
-              {spice.icon}
-            </motion.div>
-          ))}
-
-          {/* Soft Central Radial Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-white/10 blur-3xl pointer-events-none" />
+          <img
+            src={activeDish.bgImage}
+            alt={`${activeDish.name} background`}
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Subtle overlay gradient to ensure high readability and premium aesthetic */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/65" />
         </motion.div>
       </AnimatePresence>
+
+      {/* Central Radial Ambient Glow Overlay */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-white/5 blur-3xl pointer-events-none z-10" />
 
       {/* LAYER 4: Fixed Header / Navigation (Appears only when viewing Hero section) */}
       <header
