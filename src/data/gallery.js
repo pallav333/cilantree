@@ -43,7 +43,7 @@ export const galleryItems = [
   },
   {
     id: 'g-6',
-    title: 'Chef Vikramaditya Plating',
+    title: 'Artisanal Plating Craft',
     category: 'CRAFT',
     aspect: 'wide',
     image: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1200&q=80',

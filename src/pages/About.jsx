@@ -1,7 +1,4 @@
-import ChefSpotlight from '../components/ChefSpotlight';
-import WhyUs from '../components/WhyUs';
-import { culinaryTeam } from '../data/chefs';
-import { Award, Flame, Leaf, Compass, ArrowRight } from 'lucide-react';
+import { Flame, Compass, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function About() {
@@ -65,7 +62,7 @@ export default function About() {
               <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-[#F8F5EC] aspect-[4/3] bg-[#102A43]">
                 <img
                   src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80"
-                  alt="Live Tandoori Oven Chef Cooking"
+                  alt="Live Tandoori Oven Cooking"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -73,48 +70,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      {/* Executive Chef Spotlight */}
-      <ChefSpotlight />
-
-      {/* Culinary Team Grid */}
-      <section className="py-20 md:py-28 bg-[#E8E0CF]/30 border-b border-[#E8E0CF]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span className="text-xs font-bold tracking-[0.25em] text-[#C98B32] uppercase">
-              MASTERS BEHIND THE FLAVOURS
-            </span>
-            <h2 className="font-serif section-heading font-bold text-[#173F36]">
-              OUR CULINARY TEAM
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {culinaryTeam.map((member, idx) => (
-              <div
-                key={idx}
-                className="bg-[#F8F5EC] p-6 rounded-2xl border border-[#E8E0CF] flex items-center space-x-6 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-24 h-24 rounded-xl object-cover border-2 border-[#C98B32] shrink-0"
-                />
-                <div>
-                  <span className="text-[10px] font-bold tracking-widest text-[#C98B32] uppercase block mb-1">
-                    {member.role}
-                  </span>
-                  <h3 className="font-serif text-xl font-bold text-[#173F36]">{member.name}</h3>
-                  <p className="text-xs text-[#17201D]/70 font-light mt-1">{member.specialty}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <WhyUs />
 
       {/* CTA Footer Banner */}
       <section className="py-16 bg-[#173F36] text-[#F8F5EC] text-center">

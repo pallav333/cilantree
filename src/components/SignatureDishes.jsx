@@ -20,7 +20,7 @@ export default function SignatureDishes() {
               SIGNATURE DISHES
             </h2>
             <p className="text-[#17201D]/70 font-light text-base md:text-lg mt-2 max-w-xl">
-              A few beloved favourites carefully crafted by Executive Chef Vikramaditya.
+              A few beloved favourites carefully crafted by our master culinary team.
             </p>
           </div>
 

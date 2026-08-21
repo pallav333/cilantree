@@ -30,7 +30,7 @@ export default function ExperienceSection() {
       title: 'PRIVATE EVENTS & PARTIES',
       icon: Users,
       bgImage: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1600&q=80',
-      description: 'Host intimate celebrations, corporate galas, or family reunions in our private dining sanctum. Customized multi-course tasting menus by Chef Vikramaditya.',
+      description: 'Host intimate celebrations, corporate galas, or family reunions in our private dining sanctum. Customized multi-course tasting menus by our master culinary team.',
       ctaText: 'INQUIRE FOR EVENTS',
       ctaLink: '/contact'
     },
