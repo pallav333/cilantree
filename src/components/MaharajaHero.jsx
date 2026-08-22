@@ -10,7 +10,6 @@ const dishes = [
   {
     id: 'biryani',
     name: 'Hyderabadi Chicken Biryani',
-    subtitle: 'Aromatic long-grain basmati, saffron rice, tender chicken, fried onions & mint leaves',
     accentColor: '#F5A623',
     image: '/biryani.png',
     bgImage: '/biryani_background.png'
@@ -18,7 +17,6 @@ const dishes = [
   {
     id: 'chicken-noodles',
     name: 'Wok Chicken Noodles',
-    subtitle: 'Stir-fried noodle strands tossed with chicken strips, scallions, chili & sesame seeds',
     accentColor: '#FF6B59',
     image: '/noodles.png',
     bgImage: '/noodles_background.png'
@@ -26,7 +24,6 @@ const dishes = [
   {
     id: 'masala-dosa',
     name: 'Golden Masala Dosa',
-    subtitle: 'Crisp golden crepe, yellow potato masala, creamy coconut chutney & rich sambar',
     accentColor: '#F7D070',
     image: '/masala dosa.png',
     bgImage: '/masala_dosa_background.png'
@@ -34,7 +31,6 @@ const dishes = [
   {
     id: 'fried-rice',
     name: 'Chicken Fried Rice',
-    subtitle: 'Wok-fried golden rice with diced carrots, green peas, scallions & scrambled egg',
     accentColor: '#4EBA6F',
     image: '/fried rice.png',
     bgImage: '/fried_rice_background.png'
@@ -165,9 +161,8 @@ export default function MaharajaHero() {
 
       {/* LAYER 4: Fixed Header / Navigation (Appears only when viewing Hero section) */}
       <header
-        className={`absolute top-0 left-0 right-0 z-50 px-8 md:px-16 py-8 flex items-center justify-between transition-all duration-500 ${
-          showHeroNav ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
-        }`}
+        className={`absolute top-0 left-0 right-0 z-50 px-8 md:px-16 py-8 flex items-center justify-between transition-all duration-500 ${showHeroNav ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+          }`}
       >
         {/* Top-Left Restaurant Logo Wordmark: CILANTREE Indian Fine Dining */}
         <Link to="/" className="flex flex-col group focus:outline-none">
@@ -215,9 +210,6 @@ export default function MaharajaHero() {
             <h1 className="font-serif text-4xl md:text-6xl font-bold text-[#FFFDF7] tracking-tight drop-shadow-lg">
               {activeDish.name}
             </h1>
-            <p className="text-sm md:text-base text-[#FFFDF7]/85 font-light leading-relaxed max-w-lg mx-auto drop-shadow">
-              {activeDish.subtitle}
-            </p>
           </motion.div>
         </AnimatePresence>
       </div>

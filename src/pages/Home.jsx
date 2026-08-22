@@ -3,9 +3,6 @@ import Hero from '../components/Hero';
 import Marquee from '../components/Marquee';
 import StorySection from '../components/StorySection';
 import SignatureDishes from '../components/SignatureDishes';
-import MenuSection from '../components/MenuSection';
-import ExperienceSection from '../components/ExperienceSection';
-import MasonryGallery from '../components/MasonryGallery';
 import LocationSection from '../components/LocationSection';
 import Testimonials from '../components/Testimonials';
 import ReservationForm from '../components/ReservationForm';
@@ -21,9 +18,6 @@ export default function Home() {
       <Marquee />
       <StorySection />
       <SignatureDishes />
-      <MenuSection limit={6} />
-      <ExperienceSection />
-      <MasonryGallery limit={6} />
       <LocationSection />
       <Testimonials />
       <ReservationForm />
