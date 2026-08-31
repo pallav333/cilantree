@@ -9,16 +9,16 @@ export default function Marquee() {
   ];
 
   return (
-    <div className="bg-[#C98B32] text-[#173F36] py-3.5 overflow-hidden border-y border-[#173F36]/20 select-none">
+    <div className="bg-[#CE4527] text-[#FAF3E8] py-3.5 overflow-hidden border-y border-[#B5351A] select-none shadow-inner">
       <div className="flex w-max animate-marquee">
         {[...Array(4)].map((_, arrayIndex) => (
           <div key={arrayIndex} className="flex items-center space-x-8 shrink-0 px-4">
-            {items.map((item, index) => (
-              <div key={index} className="flex items-center space-x-8">
-                <span className="text-xs md:text-sm font-bold tracking-[0.25em] uppercase font-sans">
+            {items.map((item, idx) => (
+              <div key={idx} className="flex items-center space-x-8">
+                <span className="font-serif text-sm md:text-base font-semibold tracking-[0.2em] uppercase">
                   {item}
                 </span>
-                <span className="text-[#173F36] text-xs">◆</span>
+                <span className="text-[#CC842F] text-xs font-bold">★</span>
               </div>
             ))}
           </div>

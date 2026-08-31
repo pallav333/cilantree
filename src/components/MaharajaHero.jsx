@@ -31,7 +31,7 @@ const dishes = [
   {
     id: 'fried-rice',
     name: 'Chicken Fried Rice',
-    accentColor: '#4EBA6F',
+    accentColor: '#E58C23',
     image: '/fried rice.png',
     bgImage: '/fried_rice_background.png'
   }
@@ -135,7 +135,7 @@ export default function MaharajaHero() {
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[100vh] overflow-hidden select-none font-sans bg-[#173F36]">
+    <section className="relative w-full h-screen min-h-[100vh] overflow-hidden select-none font-sans bg-[#5C1405]">
       {/* LAYER 1: Full-Screen Background Image with Instant Simultaneous Crossfade */}
       <AnimatePresence>
         <motion.div
@@ -164,28 +164,35 @@ export default function MaharajaHero() {
         className={`absolute top-0 left-0 right-0 z-50 px-8 md:px-16 py-8 flex items-center justify-between transition-all duration-500 ${showHeroNav ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
           }`}
       >
-        {/* Top-Left Restaurant Logo Wordmark: CILANTREE Indian Fine Dining */}
-        <Link to="/" className="flex flex-col group focus:outline-none">
-          <span className="font-serif text-3xl md:text-4xl font-bold tracking-[0.25em] text-[#FFFDF7] group-hover:text-[#F5A623] transition-colors duration-300">
-            CILANTREE
-          </span>
-          <span className="text-[10px] tracking-[0.4em] font-semibold text-[#F5A623] uppercase -mt-1">
-            INDIAN FINE DINING
-          </span>
+        {/* Top-Left Restaurant Logo & Wordmark */}
+        <Link to="/" className="flex items-center space-x-3 group focus:outline-none">
+          <img 
+            src="/Saffron-Circle-Logo.png" 
+            alt="Saffron Circle Logo" 
+            className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-md" 
+          />
+          <div className="flex flex-col">
+            <span className="font-serif text-lg md:text-xl font-bold tracking-[0.2em] text-[#FFFDF8] group-hover:text-[#CC842F] transition-colors duration-300 leading-tight">
+              SAFFRON CIRCLE
+            </span>
+            <span className="text-[8px] md:text-[9px] tracking-[0.3em] font-semibold text-[#CE4527] uppercase">
+              INDIAN FINE DINING
+            </span>
+          </div>
         </Link>
 
         {/* Top-Right Action Buttons */}
         <div className="flex items-center space-x-4 md:space-x-6">
           <Link
             to="/reservations"
-            className="inline-flex items-center space-x-2 bg-[#FFFDF7]/15 hover:bg-[#FFFDF7] text-[#FFFDF7] hover:text-[#173F36] border border-[#FFFDF7]/40 text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg backdrop-blur-md transition-all duration-300 shadow-lg"
+            className="group inline-flex items-center space-x-2 bg-[#FFFDF8]/15 hover:bg-[#FFFDF8] text-[#FFFDF8] hover:text-[#CC842F] border border-[#FFFDF8]/40 text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg backdrop-blur-md transition-all duration-300 shadow-lg"
           >
-            <Calendar className="w-3.5 h-3.5 text-[#F5A623]" />
+            <Calendar className="w-3.5 h-3.5 text-[#CE4527] group-hover:text-[#CC842F] transition-colors" />
             <span>RESERVE A TABLE</span>
           </Link>
           <Link
             to="/menu"
-            className="inline-flex items-center space-x-2 bg-[#F5A623] hover:bg-[#e09316] text-[#173F36] text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg transition-all duration-300 shadow-xl hover:-translate-y-0.5"
+            className="inline-flex items-center space-x-2 bg-[#CC842F] hover:bg-[#B57326] text-[#FFFDF8] text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg transition-all duration-300 shadow-xl hover:-translate-y-0.5"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
             <span>BOOK ONLINE</span>
@@ -204,10 +211,10 @@ export default function MaharajaHero() {
             transition={{ duration: 0.8 }}
             className="max-w-2xl mx-auto space-y-3"
           >
-            <span className="inline-block text-[11px] font-bold tracking-[0.3em] uppercase text-[#F5A623] bg-black/25 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
+            <span className="inline-block text-[11px] font-bold tracking-[0.3em] uppercase text-[#C98B32] bg-black/25 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
               FEATURED SPECIALTY
             </span>
-            <h1 className="font-serif text-4xl md:text-6xl font-bold text-[#FFFDF7] tracking-tight drop-shadow-lg">
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-[#FFFDF8] tracking-tight drop-shadow-lg">
               {activeDish.name}
             </h1>
           </motion.div>

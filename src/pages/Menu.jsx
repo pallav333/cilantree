@@ -1,66 +1,53 @@
 import MenuSection from '../components/MenuSection';
-import { Download, Calendar } from 'lucide-react';
+import { Calendar, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function MenuPage() {
   return (
-    <main className="pt-28 pb-20 bg-[#F8F5EC]">
-      {/* Page Hero */}
-      <section className="bg-[#173F36] text-[#F8F5EC] py-20 md:py-28 border-b border-[#102A43]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+    <main className="pt-28 pb-20 bg-[#F5EBDD]">
+      {/* Page Hero Header */}
+      <section className="bg-[#242A33] bg-jali-pattern text-[#FAF3E8] py-20 md:py-28 relative overflow-hidden border-b border-[#333C48]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <div className="max-w-3xl space-y-4">
-            <span className="text-xs font-bold tracking-[0.25em] text-[#C98B32] uppercase">
-              ARTISANAL GASTRONOMY
+            <span className="text-xs font-bold tracking-[0.25em] text-[#CC842F] uppercase">
+              ARTISANAL CULINARY SELECTIONS
             </span>
-            <h1 className="font-serif hero-heading font-bold text-[#F8F5EC]">
-              OUR FULL MENU
+            <h1 className="font-serif hero-heading font-bold text-[#FFFDF8]">
+              DINING MENU.<br />
+              <span className="italic font-normal text-[#CC842F]">HERITAGE & INNOVATION.</span>
             </h1>
-            <p className="text-base md:text-xl text-[#F8F5EC]/85 font-light max-w-xl">
-              From claypot curries and live tandoori charcoal kebabs to saffron biryanis and handcrafted botanic cocktails.
+            <p className="text-base md:text-xl text-[#FAF3E8]/85 font-light max-w-xl">
+              Explore our comprehensive range of regional curries, tandoori grills, artisan breads, and handcrafted Indian desserts.
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="flex flex-wrap items-center gap-4">
-            <a
-              href="#menu-section"
-              onClick={(e) => {
-                e.preventDefault();
-                alert('PDF Menu download started (Mock). In production, this opens Cilantree-Menu-2026.pdf');
-              }}
-              className="inline-flex items-center space-x-2 bg-[#E8E0CF]/20 hover:bg-[#C98B32] hover:text-[#173F36] text-[#F8F5EC] text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg border border-[#F8F5EC]/30 transition-all"
-            >
-              <Download className="w-4 h-4" />
-              <span>DOWNLOAD PDF MENU</span>
-            </a>
+      {/* Main Interactive Menu Component */}
+      <MenuSection showHeader={false} />
+
+      {/* Dietary Information Banner */}
+      <section className="py-16 bg-[#F5EBDD] border-t border-[#E9D9C2]">
+        <div className="max-w-5xl mx-auto px-6 text-center space-y-4">
+          <span className="text-xs font-bold tracking-[0.2em] text-[#CC842F] uppercase">
+            DIETARY & ALLERGY NOTICE
+          </span>
+          <h3 className="font-serif text-2xl font-bold text-[#CE4527]">
+            Crafted for Every Palate
+          </h3>
+          <p className="text-xs md:text-sm text-[#29251F]/75 font-light max-w-2xl mx-auto leading-relaxed">
+            All our meats are 100% certified Halal. We offer extensive Gluten-Free, Dairy-Free, and Vegan preparations upon request. Please inform your service captain of any severe allergies before ordering.
+          </p>
+
+          <div className="pt-4 flex justify-center space-x-4">
             <Link
               to="/reservations"
-              className="inline-flex items-center space-x-2 bg-[#C98B32] hover:bg-[#b07827] text-[#173F36] text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg transition-all"
+              className="inline-flex items-center space-x-2 bg-[#CE4527] hover:bg-[#B5351A] text-[#FFFDF8] text-xs font-bold tracking-widest px-8 py-3.5 rounded-md transition-all shadow-md border border-[#CC842F]/30"
             >
               <Calendar className="w-4 h-4" />
               <span>RESERVE TABLE</span>
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* Complete Interactive Menu Component */}
-      <MenuSection showHeader={false} />
-
-      {/* Dietary & Allergen Notice */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 py-12 border-t border-[#E8E0CF]">
-        <div className="bg-[#E8E0CF]/40 p-8 rounded-2xl border border-[#E8E0CF] flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1">
-            <h4 className="font-serif text-lg font-bold text-[#173F36]">Dietary Accommodations & Allergens</h4>
-            <p className="text-xs text-[#17201D]/75 font-light">
-              We proudly offer Halal-certified meats, 100% vegetarian items, and gluten-free adaptations. Please inform your server of any allergies prior to ordering.
-            </p>
-          </div>
-          <Link
-            to="/reservations"
-            className="shrink-0 bg-[#173F36] text-[#F8F5EC] text-xs font-bold tracking-widest px-6 py-3 rounded-lg hover:bg-[#102A43] transition-colors"
-          >
-            BOOK YOUR TABLE
-          </Link>
         </div>
       </section>
     </main>

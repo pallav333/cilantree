@@ -1,14 +1,14 @@
-# Cilantree — Contemporary Authentic Indian Fine Dining
+# Saffron Circle — Contemporary Authentic Indian Fine Dining
 
 > **A contemporary dining experience rooted in the timeless flavours of India.**
 
-Cilantree is a complete, production-quality, responsive restaurant web application inspired by the information architecture, conversion strategy, and menu presentation of the **Foodee** template, redesigned from the ground up using the visual identity, editorial palette, typography, and contemporary Indian dining aesthetic of **Cilantree**.
+Saffron Circle is a complete, production-quality, responsive restaurant web application inspired by the information architecture, conversion strategy, and menu presentation of the **Foodee** template, redesigned from the ground up using the visual identity, editorial palette, typography, and contemporary Indian dining aesthetic of **Saffron Circle**.
 
 ---
 
 ## 🎨 Visual Identity & Color System
 
-The website features an airy, elegant, light editorial aesthetic built around Cilantree's signature palette:
+The website features an airy, elegant, light editorial aesthetic built around Saffron Circle's signature palette:
 
 - **Primary Forest Green** (`#173F36`) — 25% balance: Used for navbar accents, hero text, testimonial cards, footer, and principal branding.
 - **Deep Navy** (`#102A43`) — 10% balance: Applied to high-conversion table reservation CTAs and experience highlights.
@@ -29,7 +29,7 @@ The website features an airy, elegant, light editorial aesthetic built around Ci
 - **Photo Gallery (`/gallery`)**: Asymmetrical masonry gallery with category filters (`FOOD`, `AMBIENCE`, `CRAFT`, `DRINKS`) and full-screen lightbox image modal.
 - **Table Reservations (`/reservations`)**: High-conversion booking form with date, time, party size, location picker, dietary notes, dining policies, and an interactive reservation confirmation modal.
 - **Contact & Locations (`/contact`)**: Multi-location cards (San Francisco Flagship & Palo Alto), direct concierge inquiry form, opening hours, valet info, and Google Maps integration links.
-- **404 Not Found (`*`)**: Custom-styled 404 page maintaining Cilantree brand aesthetics.
+- **404 Not Found (`*`)**: Custom-styled 404 page maintaining Saffron Circle brand aesthetics.
 
 ---
 
@@ -98,8 +98,8 @@ src/
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/pallav333/cilantree.git
-   cd cilantree
+   git clone https://github.com/pallav333/saffron-circle.git
+   cd saffron-circle
    ```
 
 2. **Install Dependencies**:
@@ -127,4 +127,4 @@ src/
 
 ## 📜 License
 
-Created for **Cilantree Fine Dining**. All rights reserved.
+Created for **Saffron Circle Fine Dining**. All rights reserved.

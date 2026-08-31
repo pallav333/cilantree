@@ -2,12 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Dual Saffron Brand Palette - Interchanged */
+  --sv-saffron-crimson: #CE4527;       /* Main Color: Dark Saffron (#CE4527) */
+  --sv-saffron-crimson-dark: #CE4527;  /* Main Background */
+  --sv-saffron-crimson-hover: #B5351A; /* Main Hover */
+  
+  --sv-saffron-gold: #CC842F;          /* Sub Color: Orange-ish Saffron (#CC842F) */
+  --sv-saffron-gold-dark: #B57326;     /* Sub Hover */
+  --sv-saffron-gold-light: #CC842F;    /* Sub Highlight */
+
+  /* Legacy Fallback Variables */
+  --sv-saffron: #CE4527;
+  --sv-saffron-dark: #CE4527;
+  --sv-saffron-light: #CC842F;
+
+  --sv-green: #CE4527;
+  --sv-green-dark: #B5351A;
+  --sv-green-light: #CC842F;
+
+  --sv-cream: #F5EBDD;
+  --sv-cream-light: #FAF3E8;
+  --sv-cream-dark: #E9D9C2;
+
+  --sv-charcoal: #29251F;
+  --sv-brown: #49392D;
+
+  --sv-gold: #CC842F;
+  --sv-terracotta: #CE4527;
+  --sv-white: #FFFDF8;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: #17201D;
-    background-color: #F8F5EC;
+    color: var(--sv-charcoal);
+    background-color: var(--sv-cream);
   }
 
   h1, h2, h3, h4, .font-serif-heading {
@@ -36,12 +67,19 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8F5EC;
+  background: var(--sv-cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: #173F36;
+  background: var(--sv-green);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #C98B32;
+  background: var(--sv-saffron);
+}
+
+/* Traditional Jali Geometric Pattern Background */
+.bg-jali-pattern {
+  background-image: url('/jali-pattern.svg');
+  background-repeat: repeat;
+  background-size: 140px 140px;
 }

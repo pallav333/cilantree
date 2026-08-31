@@ -1,10 +1,10 @@
 export const locations = [
   {
     id: 'sf-flagship',
-    name: 'Cilantree Flagship — Gourmet District',
+    name: 'Saffron Circle Flagship — Gourmet District',
     address: '142 Culinary Avenue, Gourmet District, San Francisco, CA 94103',
     phone: '+1 (555) 348-2890',
-    email: 'sf@cilantree.com',
+    email: 'sf@saffroncircle.com',
     hours: [
       { days: 'Tue – Thu', time: '5:00 PM – 10:30 PM' },
       { days: 'Fri – Sat', time: '5:00 PM – 11:30 PM' },
@@ -17,10 +17,10 @@ export const locations = [
   },
   {
     id: 'palo-alto',
-    name: 'Cilantree — Downtown Palo Alto',
+    name: 'Saffron Circle — Downtown Palo Alto',
     address: '480 University Ave, Palo Alto, CA 94301',
     phone: '+1 (555) 892-4112',
-    email: 'paloalto@cilantree.com',
+    email: 'paloalto@saffroncircle.com',
     hours: [
       { days: 'Tue – Sun', time: '5:00 PM – 10:00 PM' },
       { days: 'Monday', time: 'Closed' }

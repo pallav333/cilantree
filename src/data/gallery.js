@@ -15,7 +15,7 @@ export const galleryItems = [
     category: 'AMBIENCE',
     aspect: 'wide',
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
-    alt: 'Warm ambient lighting in the Cilantree dining room'
+    alt: 'Warm ambient lighting in the Saffron Circle dining room'
   },
   {
     id: 'g-3',

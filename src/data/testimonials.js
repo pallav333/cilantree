@@ -1,7 +1,7 @@
 export const testimonials = [
   {
     id: 1,
-    quote: 'Cilantree elevates Indian dining to an unprecedented standard. The Claypot Butter Chicken and Truffle Mushroom Kebab were transcendent.',
+    quote: 'Saffron Circle elevates Indian dining to an unprecedented standard. The Claypot Butter Chicken and Truffle Mushroom Kebab were transcendent.',
     name: 'Eleanor Vance',
     role: 'Food & Dining Critic',
     publication: 'San Francisco Chronicle',
@@ -11,7 +11,7 @@ export const testimonials = [
   },
   {
     id: 2,
-    quote: 'The balance of deep spice complexity and refined modern presentation makes Cilantree the absolute benchmark for modern Indian cuisine.',
+    quote: 'The balance of deep spice complexity and refined modern presentation makes Saffron Circle the absolute benchmark for modern Indian cuisine.',
     name: 'Jonathan Sterling',
     role: 'Gastronomy Enthusiast',
     publication: 'Michelin Dining Guide',

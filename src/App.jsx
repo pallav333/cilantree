@@ -13,7 +13,7 @@ import NotFound from './pages/NotFound';
 
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8F5EC] text-[#17201D] font-sans selection:bg-[#173F36] selection:text-[#F8F5EC]">
+    <div className="min-h-screen flex flex-col bg-[#F8F5EC] text-[#17201D] font-sans selection:bg-[#CE4527] selection:text-[#F8F5EC]">
       <ScrollToTop />
       <Navbar />
       <div className="flex-1">
