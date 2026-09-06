@@ -25,13 +25,31 @@ export default function MenuSection({ limit, showHeader = true }) {
     <section className="py-24 md:py-32 bg-[#F5EBDD]" id="menu-section">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {showHeader && (
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center max-w-3xl mx-auto mb-16 space-y-4"
+          >
             <div className="inline-flex items-center justify-center space-x-3">
-              <span className="h-[1px] w-8 bg-[#CC842F]" />
+              <motion.span
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="h-[1px] w-8 bg-[#CC842F] origin-right inline-block"
+              />
               <span className="text-xs font-bold tracking-[0.25em] text-[#CC842F] uppercase">
                 ARTISANAL GASTRONOMY
               </span>
-              <span className="h-[1px] w-8 bg-[#CC842F]" />
+              <motion.span
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="h-[1px] w-8 bg-[#CC842F] origin-left inline-block"
+              />
             </div>
             <h2 className="font-serif section-heading font-bold text-[#CE4527]">
               OUR DINING MENU
@@ -39,11 +57,17 @@ export default function MenuSection({ limit, showHeader = true }) {
             <p className="text-[#29251F]/75 font-light text-base md:text-lg">
               Each dish is individually prepared using authentic Indian spices and local farm-fresh ingredients.
             </p>
-          </div>
+          </motion.div>
         )}
 
         {/* Filter Controls Bar */}
-        <div className="space-y-8 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="space-y-8 mb-12"
+        >
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 max-w-4xl mx-auto bg-[#E9D9C2]/40 p-3 rounded-2xl border border-[#E9D9C2]">
             {/* Search Input */}
             <div className="relative w-full sm:w-80">
@@ -89,32 +113,36 @@ export default function MenuSection({ limit, showHeader = true }) {
                     <motion.div
                       layoutId="activeCategoryBorder"
                       className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#CC842F]"
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
                 </button>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Menu Items Grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory + (vegOnly ? '-veg' : '') + searchQuery}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8"
           >
             {displayedItems.length > 0 ? (
-              displayedItems.map((item) => (
-                <div
+              displayedItems.map((item, idx) => (
+                <motion.div
                   key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: Math.min(idx * 0.05, 0.35), ease: [0.22, 1, 0.36, 1] }}
                   className="group bg-[#FAF3E8] p-4 rounded-xl border border-[#E9D9C2] hover:border-[#CC842F] shadow-sm hover:shadow-md transition-all duration-300 flex items-center space-x-5"
                 >
                   {/* Thumbnail */}
-                  <div className="w-24 h-24 rounded-lg overflow-hidden shrink-0 bg-[#CE4527] relative">
+                  <div className="w-24 h-24 rounded-lg overflow-hidden shrink-0 bg-[#FAF3E8] relative">
                     <img
                       src={item.image}
                       alt={item.name}
@@ -159,7 +187,7 @@ export default function MenuSection({ limit, showHeader = true }) {
                       )}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))
             ) : (
               <div className="col-span-full text-center py-16 bg-[#E9D9C2]/20 rounded-2xl border border-dashed border-[#E9D9C2]">
@@ -171,7 +199,13 @@ export default function MenuSection({ limit, showHeader = true }) {
         </AnimatePresence>
 
         {limit && limit < filteredItems.length && (
-          <div className="text-center mt-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mt-16"
+          >
             <Link
               to="/menu"
               className="inline-flex items-center space-x-2 bg-[#CC842F] hover:bg-[#B57326] text-[#FFFDF8] text-xs font-bold tracking-widest px-8 py-4 rounded-md transition-all duration-300 hover:shadow-lg border border-[#CE4527]/30"
@@ -179,7 +213,7 @@ export default function MenuSection({ limit, showHeader = true }) {
               <span>EXPLORE ALL {menuItems.length} MENU DISHES</span>
               <ArrowUpRight className="w-4 h-4 text-[#FFFDF8]" />
             </Link>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

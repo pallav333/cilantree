@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, Users, User, Mail, Phone, MessageSquare, CheckCircle, X } from 'lucide-react';
+import { Calendar, Clock, Users, User, Mail, Phone, MessageSquare, CheckCircle, X, Sparkles, MapPin } from 'lucide-react';
 import { locations } from '../data/locations';
 
 export default function ReservationForm() {
@@ -30,11 +30,26 @@ export default function ReservationForm() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* LEFT: Heading & Sidebar Details */}
-          <div className="lg:col-span-5 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 space-y-8"
+          >
             <div>
-              <span className="text-xs font-bold tracking-[0.25em] text-[#CC842F] uppercase block mb-2">
-                TABLE RESERVATIONS
-              </span>
+              <div className="flex items-center space-x-3 mb-2">
+                <motion.span
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                  className="h-[1px] w-8 bg-[#CC842F] origin-left inline-block"
+                />
+                <span className="text-xs font-bold tracking-[0.25em] text-[#CC842F] uppercase">
+                  TABLE RESERVATIONS
+                </span>
+              </div>
               <h2 className="font-serif section-heading font-bold text-[#FFFDF8]">
                 YOUR TABLE<br />
                 <span className="italic font-normal text-[#CC842F]">IS WAITING.</span>
@@ -44,9 +59,10 @@ export default function ReservationForm() {
               </p>
             </div>
 
-            <div className="space-y-6 bg-[#CE4527]/80 p-8 rounded-2xl border border-[#FAF3E8]/15">
-              <h3 className="font-serif text-xl font-bold text-[#FFFDF8] border-b border-[#FAF3E8]/10 pb-3">
-                DINING DETAILS
+            <div className="space-y-6 bg-[#CE4527]/80 backdrop-blur-md p-8 rounded-2xl border border-[#FAF3E8]/15 shadow-xl">
+              <h3 className="font-serif text-xl font-bold text-[#FFFDF8] border-b border-[#FAF3E8]/10 pb-3 flex items-center justify-between">
+                <span>DINING DETAILS</span>
+                <Sparkles className="w-4 h-4 text-[#CC842F]" />
               </h3>
 
               <div className="space-y-4 text-xs font-light text-[#FAF3E8]/90">
@@ -66,16 +82,22 @@ export default function ReservationForm() {
 
                 <div>
                   <span className="font-semibold text-[#CC842F] uppercase block tracking-wider mb-1">
-                    VALET & PARKING
+                    VALET &amp; PARKING
                   </span>
                   <span>{selectedLoc.valetParking}</span>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* RIGHT: Form */}
-          <div className="lg:col-span-7 bg-[#FAF3E8] text-[#29251F] p-8 md:p-12 rounded-3xl shadow-2xl border border-[#E9D9C2]">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 bg-[#FAF3E8] text-[#29251F] p-8 md:p-12 rounded-3xl shadow-2xl border border-[#E9D9C2]"
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
               <h3 className="font-serif text-2xl font-bold text-[#CE4527] mb-4">
                 Reserve Your Dining Experience
@@ -86,15 +108,18 @@ export default function ReservationForm() {
                 <label className="text-xs font-bold tracking-widest text-[#CC842F] uppercase block mb-2">
                   SELECT LOCATION
                 </label>
-                <select
-                  value={formData.location}
-                  onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                  className="w-full bg-[#E9D9C2]/40 border border-[#E9D9C2] text-xs font-medium text-[#29251F] p-3.5 rounded-xl focus:outline-none focus:border-[#CE4527]"
-                >
-                  {locations.map(loc => (
-                    <option key={loc.id} value={loc.id}>{loc.name}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <MapPin className="w-4 h-4 text-[#CC842F] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <select
+                    value={formData.location}
+                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                    className="w-full bg-[#E9D9C2]/40 border border-[#E9D9C2] text-xs font-medium text-[#29251F] pl-10 pr-4 py-3.5 rounded-xl focus:outline-none focus:border-[#CE4527] transition-colors"
+                  >
+                    {locations.map(loc => (
+                      <option key={loc.id} value={loc.id}>{loc.name}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               {/* Date & Time Grid */}
@@ -235,12 +260,12 @@ export default function ReservationForm() {
 
               <button
                 type="submit"
-                className="w-full bg-[#CE4527] hover:bg-[#B5351A] text-[#FFFDF8] text-xs font-bold tracking-widest py-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5"
+                className="w-full bg-[#CE4527] hover:bg-[#B5351A] text-[#FFFDF8] text-xs font-bold tracking-widest py-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:scale-[1.01] transform"
               >
                 CONFIRM RESERVATION
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -257,6 +282,7 @@ export default function ReservationForm() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="bg-[#FAF3E8] max-w-lg w-full p-8 md:p-10 rounded-3xl shadow-2xl border border-[#CC842F] text-center space-y-6 relative"
             >
               <button
@@ -266,7 +292,7 @@ export default function ReservationForm() {
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="w-16 h-16 rounded-full bg-[#CE4527] text-[#FFFDF8] flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 rounded-full bg-[#CE4527] text-[#FFFDF8] flex items-center justify-center mx-auto shadow-lg">
                 <CheckCircle className="w-10 h-10" />
               </div>
 
@@ -285,7 +311,7 @@ export default function ReservationForm() {
                   <span className="font-bold">{formData.name}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#29251F]/60">Date & Time:</span>
+                  <span className="text-[#29251F]/60">Date &amp; Time:</span>
                   <span className="font-bold">{formData.date} at {formData.time}</span>
                 </div>
                 <div className="flex justify-between">
@@ -304,7 +330,7 @@ export default function ReservationForm() {
 
               <button
                 onClick={() => setIsSubmitted(false)}
-                className="w-full bg-[#CE4527] text-[#FFFDF8] text-xs font-bold tracking-widest py-3.5 rounded-xl hover:bg-[#B5351A] transition-colors"
+                className="w-full bg-[#CE4527] text-[#FFFDF8] text-xs font-bold tracking-widest py-3.5 rounded-xl hover:bg-[#B5351A] transition-colors shadow-md"
               >
                 RETURN TO WEBSITE
               </button>

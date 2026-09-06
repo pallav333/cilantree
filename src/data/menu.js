@@ -55,7 +55,7 @@ export const menuItems = [
     image: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80',
     vegetarian: false,
     spicy: 2,
-    featured: true
+    featured: false
   },
 
   // TANDOOR & CURRIES
@@ -102,7 +102,7 @@ export const menuItems = [
     image: 'https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80',
     vegetarian: false,
     spicy: 2,
-    featured: true
+    featured: false
   },
 
   // CURRIES
@@ -120,7 +120,7 @@ export const menuItems = [
   },
   {
     id: 'cur-2',
-    name: 'Signature Cilantree Dal Makhani',
+    name: 'Signature Saffron Dal Makhani',
     category: 'CURRIES',
     description: 'Slow-simmered black lentils and kidney beans cooked over wood embers for 24 hours, enriched with organic cream.',
     price: 24,
@@ -198,7 +198,7 @@ export const menuItems = [
     image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80',
     vegetarian: true,
     spicy: 0,
-    featured: true
+    featured: false
   },
   {
     id: 'brd-2',
@@ -233,7 +233,7 @@ export const menuItems = [
     image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80',
     vegetarian: true,
     spicy: 0,
-    featured: true
+    featured: false
   },
   {
     id: 'des-2',
@@ -257,7 +257,7 @@ export const menuItems = [
     image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80',
     vegetarian: true,
     spicy: 0,
-    featured: true
+    featured: false
   },
   {
     id: 'drk-2',

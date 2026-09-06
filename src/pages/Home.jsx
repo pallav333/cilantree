@@ -9,18 +9,24 @@ import ReservationForm from '../components/ReservationForm';
 
 export default function Home() {
   return (
-    <main>
-      {/* 100vh Maharaja Clockwise Food Carousel Hero Section (First Section) */}
+    <div className="relative overflow-hidden bg-[#F5EBDD]">
+      {/* Standard Sections in Natural Flow */}
       <MaharajaHero />
-
-      {/* Shifted Existing Sections Below */}
       <Hero />
       <Marquee />
       <StorySection />
       <SignatureDishes />
-      <LocationSection />
-      <Testimonials />
-      <ReservationForm />
-    </main>
+
+      {/* Location Section */}
+      <div className="relative z-10 w-full">
+        <LocationSection />
+      </div>
+
+      {/* Mughal Jali Evening Sanctum */}
+      <div className="relative z-20 w-full bg-[#242A33] bg-jali-pattern border-t-2 border-[#CC842F]/50 shadow-[0_-25px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+        <Testimonials />
+        <ReservationForm />
+      </div>
+    </div>
   );
 }

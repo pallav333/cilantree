@@ -1,4 +1,16 @@
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+
 export default function Marquee() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start']
+  });
+
+  // Pure GPU compositor horizontal parallax drift (0% CPU, zero re-renders)
+  const xOffset = useTransform(scrollYProgress, [0, 1], ['4%', '-4%']);
+
   const items = [
     'AUTHENTIC FLAVOURS',
     'FRESH INGREDIENTS',
@@ -9,8 +21,11 @@ export default function Marquee() {
   ];
 
   return (
-    <div className="bg-[#CE4527] text-[#FAF3E8] py-3.5 overflow-hidden border-y border-[#B5351A] select-none shadow-inner">
-      <div className="flex w-max animate-marquee">
+    <div ref={containerRef} className="bg-[#CE4527] text-[#FAF3E8] py-3.5 overflow-hidden border-y border-[#B5351A] select-none shadow-inner">
+      <motion.div
+        style={{ x: xOffset, willChange: 'transform' }}
+        className="flex w-max animate-marquee"
+      >
         {[...Array(4)].map((_, arrayIndex) => (
           <div key={arrayIndex} className="flex items-center space-x-8 shrink-0 px-4">
             {items.map((item, idx) => (
@@ -23,7 +38,7 @@ export default function Marquee() {
             ))}
           </div>
         ))}
-      </div>
+      </motion.div>
       <style>{`
         @keyframes marquee {
           0% { transform: translateX(0%); }

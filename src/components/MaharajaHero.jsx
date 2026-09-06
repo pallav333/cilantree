@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Calendar, ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -39,10 +39,17 @@ const dishes = [
 
 export default function MaharajaHero() {
   const [activeState, setActiveState] = useState(0);
-  const [rotationAngle, setRotationAngle] = useState(0);
   const [showHeroNav, setShowHeroNav] = useState(true);
-  const reqRef = useRef(null);
-  const lastTimeRef = useRef(null);
+  const sectionRef = useRef(null);
+
+  // Scroll depth exit transforms (GPU-accelerated translate3d + opacity)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start']
+  });
+
+  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.85, 1], [1, 0.95, 0.75]);
 
   // 1. Scroll listener to hide Hero navbar when scrolling down past Hero
   useEffect(() => {
@@ -57,24 +64,6 @@ export default function MaharajaHero() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // 2. Continuous rotation loop that NEVER resets or snaps orientation
-  useEffect(() => {
-    const updateRotation = (time) => {
-      if (lastTimeRef.current !== null) {
-        const delta = time - lastTimeRef.current;
-        // Smooth ~12 degrees/sec continuous rotation without orientation jumps
-        setRotationAngle((prev) => (prev + delta * 0.012));
-      }
-      lastTimeRef.current = time;
-      reqRef.current = requestAnimationFrame(updateRotation);
-    };
-
-    reqRef.current = requestAnimationFrame(updateRotation);
-    return () => {
-      if (reqRef.current) cancelAnimationFrame(reqRef.current);
-    };
   }, []);
 
   // 3. Pure automatic state transition timer for clockwise carousel
@@ -135,8 +124,13 @@ export default function MaharajaHero() {
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[100vh] overflow-hidden select-none font-sans bg-[#5C1405]">
-      {/* LAYER 1: Full-Screen Background Image with Instant Simultaneous Crossfade */}
+    <section ref={sectionRef} className="relative w-full h-screen min-h-[100vh] overflow-hidden select-none font-sans bg-[#5C1405]">
+      {/* Scroll-driven Parallax Depth Wrapper */}
+      <motion.div
+        style={{ y: heroY, opacity: heroOpacity, willChange: 'transform, opacity' }}
+        className="absolute inset-0 w-full h-full overflow-hidden origin-bottom pointer-events-none"
+      >
+        {/* LAYER 1: Full-Screen Background Image with Instant Simultaneous Crossfade */}
       <AnimatePresence>
         <motion.div
           key={activeDish.id + '-bg'}
@@ -156,49 +150,11 @@ export default function MaharajaHero() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Central Radial Ambient Glow Overlay */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-white/5 blur-3xl pointer-events-none z-10" />
-
-      {/* LAYER 4: Fixed Header / Navigation (Appears only when viewing Hero section) */}
-      <header
-        className={`absolute top-0 left-0 right-0 z-50 px-8 md:px-16 py-8 flex items-center justify-between transition-all duration-500 ${showHeroNav ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
-          }`}
-      >
-        {/* Top-Left Restaurant Logo & Wordmark */}
-        <Link to="/" className="flex items-center space-x-3 group focus:outline-none">
-          <img 
-            src="/Saffron-Circle-Logo.png" 
-            alt="Saffron Circle Logo" 
-            className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-md" 
-          />
-          <div className="flex flex-col">
-            <span className="font-serif text-lg md:text-xl font-bold tracking-[0.2em] text-[#FFFDF8] group-hover:text-[#CC842F] transition-colors duration-300 leading-tight">
-              SAFFRON CIRCLE
-            </span>
-            <span className="text-[8px] md:text-[9px] tracking-[0.3em] font-semibold text-[#CE4527] uppercase">
-              INDIAN FINE DINING
-            </span>
-          </div>
-        </Link>
-
-        {/* Top-Right Action Buttons */}
-        <div className="flex items-center space-x-4 md:space-x-6">
-          <Link
-            to="/reservations"
-            className="group inline-flex items-center space-x-2 bg-[#FFFDF8]/15 hover:bg-[#FFFDF8] text-[#FFFDF8] hover:text-[#CC842F] border border-[#FFFDF8]/40 text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg backdrop-blur-md transition-all duration-300 shadow-lg"
-          >
-            <Calendar className="w-3.5 h-3.5 text-[#CE4527] group-hover:text-[#CC842F] transition-colors" />
-            <span>RESERVE A TABLE</span>
-          </Link>
-          <Link
-            to="/menu"
-            className="inline-flex items-center space-x-2 bg-[#CC842F] hover:bg-[#B57326] text-[#FFFDF8] text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg transition-all duration-300 shadow-xl hover:-translate-y-0.5"
-          >
-            <ShoppingBag className="w-3.5 h-3.5" />
-            <span>BOOK ONLINE</span>
-          </Link>
-        </div>
-      </header>
+      {/* Central Radial Ambient Glow Overlay - Hardware-accelerated radial glow */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none z-10" 
+        style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 65%)' }}
+      />
 
       {/* ACTIVE DISH TITLE & SUBTITLE OVERLAY */}
       <div className="absolute top-32 md:top-36 left-0 right-0 z-30 text-center px-6 pointer-events-none">
@@ -249,13 +205,8 @@ export default function MaharajaHero() {
             >
               {/* Plate Container with Clean Overhead Perspective */}
               <div className="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 rounded-full p-1 flex items-center justify-center">
-                {/* Image container continuously rotates without orientation resets */}
-                <div
-                  className="w-full h-full rounded-full overflow-hidden relative drop-shadow-2xl flex items-center justify-center"
-                  style={{
-                    transform: `rotate(${rotationAngle}deg)`
-                  }}
-                >
+                {/* Image container continuously rotates on the GPU compositor without orientation resets */}
+                <div className="w-full h-full rounded-full overflow-hidden relative drop-shadow-2xl flex items-center justify-center spin-continuous">
                   <img
                     src={dish.image}
                     alt={dish.name}
@@ -266,7 +217,49 @@ export default function MaharajaHero() {
             </motion.div>
           );
         })}
-      </div>
+        </div>
+      </motion.div>
+
+      {/* LAYER 4: Fixed Header / Navigation (Appears only when viewing Hero section) */}
+      <header
+        className={`absolute top-0 left-0 right-0 z-50 px-8 md:px-16 py-8 flex items-center justify-between transition-all duration-500 ${showHeroNav ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+          }`}
+      >
+        {/* Top-Left Restaurant Logo & Wordmark */}
+        <Link to="/" className="flex items-center space-x-3 group focus:outline-none">
+          <img 
+            src="/Saffron-Circle-Logo.png" 
+            alt="Saffron Circle Logo" 
+            className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-md" 
+          />
+          <div className="flex flex-col">
+            <span className="font-serif text-lg md:text-xl font-bold tracking-[0.2em] text-[#FFFDF8] group-hover:text-[#CC842F] transition-colors duration-300 leading-tight">
+              SAFFRON CIRCLE
+            </span>
+            <span className="text-[8px] md:text-[9px] tracking-[0.3em] font-semibold text-[#CE4527] uppercase">
+              INDIAN FINE DINING
+            </span>
+          </div>
+        </Link>
+
+        {/* Top-Right Action Buttons */}
+        <div className="flex items-center space-x-4 md:space-x-6">
+          <Link
+            to="/reservations"
+            className="group inline-flex items-center space-x-2 bg-[#FFFDF8]/15 hover:bg-[#FFFDF8] text-[#FFFDF8] hover:text-[#CC842F] border border-[#FFFDF8]/40 text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg backdrop-blur-md transition-all duration-300 shadow-lg"
+          >
+            <Calendar className="w-3.5 h-3.5 text-[#CE4527] group-hover:text-[#CC842F] transition-colors" />
+            <span>RESERVE A TABLE</span>
+          </Link>
+          <Link
+            to="/menu"
+            className="inline-flex items-center space-x-2 bg-[#CC842F] hover:bg-[#B57326] text-[#FFFDF8] text-xs font-bold tracking-widest px-6 py-3.5 rounded-lg transition-all duration-300 shadow-xl hover:-translate-y-0.5"
+          >
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>BOOK ONLINE</span>
+          </Link>
+        </div>
+      </header>
     </section>
   );
 }

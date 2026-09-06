@@ -1,15 +1,26 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Utensils, Award } from 'lucide-react';
 
 export default function Hero() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start']
+  });
+
+  const videoY = useTransform(scrollYProgress, [0, 1], [35, -35]);
+  const badgeY = useTransform(scrollYProgress, [0, 1], [65, -65]);
+  const glowY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.12,
-        delayChildren: 0.2
+        delayChildren: 0.15
       }
     }
   };
@@ -24,9 +35,12 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#F5EBDD]">
-      {/* Background Subtle Accent Graphic */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#E9D9C2]/40 rounded-full blur-3xl pointer-events-none -z-10" />
+    <section ref={sectionRef} className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#F5EBDD]">
+      {/* Background Subtle Accent Graphic with Parallax */}
+      <motion.div
+        style={{ y: glowY }}
+        className="absolute top-1/4 right-0 w-96 h-96 bg-[#E9D9C2]/40 rounded-full blur-3xl pointer-events-none -z-10"
+      />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -34,7 +48,8 @@ export default function Hero() {
           <motion.div
             variants={containerVariants}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.25 }}
             className="lg:col-span-7 space-y-8"
           >
             {/* Small Category Tag */}
@@ -100,13 +115,15 @@ export default function Hero() {
           {/* RIGHT: High-Impact Photography Composition */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            style={{ y: videoY }}
             className="lg:col-span-5 relative"
           >
             <div className="relative mx-auto max-w-md lg:max-w-none">
               {/* Primary Hero Food Image */}
-              <div className="overflow-hidden rounded-2xl shadow-2xl border-4 border-[#FAF3E8] bg-[#CE4527] aspect-[4/5] relative">
+              <div className="overflow-hidden rounded-2xl shadow-2xl border-4 border-[#FAF3E8] bg-[#FAF3E8] aspect-[4/5] relative">
                 <video
                   src="/video.mp4"
                   autoPlay
@@ -115,21 +132,13 @@ export default function Hero() {
                   playsInline
                   className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#CE4527]/80 via-transparent to-transparent pointer-events-none" />
-                
-                {/* Subtle Image Tag */}
-                <div className="absolute bottom-6 left-6 right-6 text-[#FFFDF8]">
-                  <span className="text-[10px] tracking-[0.2em] font-semibold text-[#CC842F] uppercase block mb-1">
-                    Signature Dish
-                  </span>
-                  <h3 className="font-serif text-xl font-bold">Old Delhi Claypot Butter Chicken</h3>
-                </div>
               </div>
 
-              {/* Rotating Circular Saffron Badge */}
+              {/* Rotating Circular Saffron Badge with parallax separation */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+                style={{ y: badgeY }}
                 className="absolute -bottom-6 -left-6 md:-bottom-8 md:-left-8 w-28 h-28 md:w-32 md:h-32 bg-[#CE4527] text-[#FFFDF8] rounded-full p-2 flex items-center justify-center shadow-xl border-4 border-[#FAF3E8] z-20 pointer-events-none"
               >
                 <svg className="w-full h-full" viewBox="0 0 100 100">
@@ -148,19 +157,6 @@ export default function Hero() {
                   <span className="font-serif text-lg font-bold text-[#CC842F]">★</span>
                 </div>
               </motion.div>
-
-              {/* Secondary Floating Card */}
-              <div className="absolute -top-6 -right-4 md:-top-8 md:-right-6 bg-[#FAF3E8]/95 backdrop-blur-md p-4 rounded-xl shadow-lg border border-[#E9D9C2] hidden sm:flex items-center space-x-3 max-w-[200px]">
-                <img
-                  src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=200&q=80"
-                  alt="Paneer Tikka"
-                  className="w-12 h-12 rounded-lg object-cover"
-                />
-                <div>
-                  <span className="text-[10px] tracking-wider text-[#CC842F] font-semibold block uppercase">Fresh Tandoori</span>
-                  <span className="font-serif text-xs font-bold text-[#CE4527]">Malai Paneer Tikka</span>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>
