@@ -3,7 +3,7 @@ import { Utensils, ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <main className="pt-32 pb-24 min-h-[75vh] bg-[#F5EBDD] flex items-center justify-center text-center px-6">
+    <main className="pt-32 pb-24 min-h-[75vh] bg-[#fde9ce] flex items-center justify-center text-center px-6">
       <div className="max-w-xl mx-auto px-6 text-center space-y-6">
         <span className="font-serif text-8xl md:text-9xl font-bold text-[#CC842F] block leading-none">
           404

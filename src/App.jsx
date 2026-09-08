@@ -16,11 +16,11 @@ import NotFound from './pages/NotFound';
 export default function App() {
   return (
     <SmoothScroll>
-      <div className="min-h-screen flex flex-col bg-[#F8F5EC] text-[#17201D] font-sans selection:bg-[#CE4527] selection:text-[#F8F5EC]">
+      <div className="min-h-screen flex flex-col bg-[#fde9ce] text-[#17201D] font-sans selection:bg-[#CE4527] selection:text-[#FAF3E8]">
         <ScrollToTop />
         <Navbar />
         {/* Main Content acting as curtain over the footer */}
-        <main className="flex-1 relative z-10 bg-[#F8F5EC] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)]">
+        <main className="flex-1 relative z-10 bg-[#fde9ce] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

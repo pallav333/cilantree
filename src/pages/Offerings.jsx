@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
   Gift, 
@@ -8,20 +8,34 @@ import {
   Sparkles, 
   CheckCircle2, 
   Users, 
-  ArrowRight,
-  Info,
-  Award
+  ArrowRight, 
+  Info, 
+  Award 
 } from 'lucide-react';
 
 export default function Offerings() {
   const giftSectionRef = useRef(null);
+  const videoRef = useRef(null);
+  const isVideoInView = useInView(videoRef, { amount: 0.35 });
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isVideoInView) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isVideoInView]);
+
   const { scrollYProgress: giftScroll } = useScroll({
     target: giftSectionRef,
     offset: ['start end', 'end start']
   });
 
   const cardParallaxY = useTransform(giftScroll, [0, 1], ['-12px', '16px']);
-  const charminarParallaxY = useTransform(giftScroll, [0, 1], ['-16px', '20px']);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -40,7 +54,7 @@ export default function Offerings() {
   };
 
   return (
-    <main className="pt-28 pb-24 bg-[#F5EBDD] overflow-hidden">
+    <main className="pt-28 pb-24 bg-[#fde9ce] overflow-hidden">
       {/* Editorial Page Hero */}
       <section className="bg-[#242A33] bg-jali-pattern text-[#FAF3E8] py-20 md:py-28 relative overflow-hidden border-b border-[#333C48]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -135,20 +149,23 @@ export default function Offerings() {
                 </div>
               </div>
 
-              {/* Charminar Architectural Heritage Illustration with Parallax */}
-              <motion.div style={{ y: charminarParallaxY }} className="pt-2 flex flex-col items-center justify-center select-none">
-                <div className="ambient-levitate relative w-full max-w-[320px] sm:max-w-[360px] md:max-w-[400px] aspect-[4/3]">
-                  <img
-                    src="/charminar.png"
-                    alt="Charminar Architectural Heritage"
-                    loading="lazy"
-                    className="w-full h-full object-contain mix-blend-multiply opacity-75 hover:opacity-90 transition-opacity duration-300 drop-shadow-[0_2px_12px_rgba(204,132,47,0.12)]"
+              {/* Golden Temple Architectural Heritage Video */}
+              <div className="pt-2 flex flex-col items-center justify-center select-none w-full">
+                <div className="relative w-full max-w-[360px] sm:max-w-[420px]">
+                  <video
+                    ref={videoRef}
+                    src="/golden_temple.mp4"
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    className="w-full h-auto object-contain block mx-auto"
                   />
                 </div>
-                <span className="text-[10px] tracking-[0.25em] font-semibold text-[#CC842F] uppercase -mt-1 text-center">
+                <span className="text-[10px] tracking-[0.25em] font-semibold text-[#CC842F] uppercase mt-2 text-center">
                   Royal Culinary Heritage &amp; Timeless Craft
                 </span>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
 
@@ -462,7 +479,7 @@ export default function Offerings() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Vikram Sharma"
-                    className="w-full bg-[#F5EBDD] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
+                    className="w-full bg-[#fde9ce] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
                   />
                 </div>
 
@@ -476,7 +493,7 @@ export default function Offerings() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="e.g. vikram@example.com"
-                    className="w-full bg-[#F5EBDD] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
+                    className="w-full bg-[#fde9ce] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
                   />
                 </div>
 
@@ -490,7 +507,7 @@ export default function Offerings() {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+1 (555) 000-0000"
-                    className="w-full bg-[#F5EBDD] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
+                    className="w-full bg-[#fde9ce] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
                   />
                 </div>
 
@@ -503,7 +520,7 @@ export default function Offerings() {
                     required
                     value={formData.eventDate}
                     onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
-                    className="w-full bg-[#F5EBDD] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
+                    className="w-full bg-[#fde9ce] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
                   />
                 </div>
 
@@ -514,7 +531,7 @@ export default function Offerings() {
                   <select
                     value={formData.eventType}
                     onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
-                    className="w-full bg-[#F5EBDD] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
+                    className="w-full bg-[#fde9ce] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
                   >
                     <option>Corporate Dinner</option>
                     <option>Wedding Banquet</option>
@@ -531,7 +548,7 @@ export default function Offerings() {
                   <select
                     value={formData.guestCount}
                     onChange={(e) => setFormData({ ...formData, guestCount: e.target.value })}
-                    className="w-full bg-[#F5EBDD] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
+                    className="w-full bg-[#fde9ce] border border-[#E9D9C2] text-xs text-[#29251F] px-4 py-3 rounded-lg focus:outline-none focus:border-[#CE4527]"
                   >
                     <option>15 – 30 Guests</option>
                     <option>30 – 60 Guests</option>
@@ -550,7 +567,7 @@ export default function Offerings() {
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   placeholder="Tell us about the venue, dietary preferences (vegetarian, vegan, halal, gluten-free), live tandoor interest, or any specific dishes you would like included..."
-                  className="w-full bg-[#F5EBDD] border border-[#E9D9C2] text-xs text-[#29251F] p-4 rounded-lg focus:outline-none focus:border-[#CE4527]"
+                  className="w-full bg-[#fde9ce] border border-[#E9D9C2] text-xs text-[#29251F] p-4 rounded-lg focus:outline-none focus:border-[#CE4527]"
                 />
               </div>
 

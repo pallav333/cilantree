@@ -35,7 +35,7 @@ export default function Hero() {
   };
 
   return (
-    <section ref={sectionRef} className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#F5EBDD]">
+    <section ref={sectionRef} className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#fde9ce]">
       {/* Background Subtle Accent Graphic with Parallax */}
       <motion.div
         style={{ y: glowY }}

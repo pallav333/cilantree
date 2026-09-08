@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function MenuPage() {
   return (
-    <main className="pt-28 pb-20 bg-[#F5EBDD] overflow-hidden">
+    <main className="pt-28 pb-20 bg-[#fde9ce] overflow-hidden">
       {/* Page Hero Header */}
       <section className="bg-[#242A33] bg-jali-pattern text-[#FAF3E8] py-20 md:py-28 relative overflow-hidden border-b border-[#333C48]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -93,7 +93,7 @@ export default function MenuPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-[#F5EBDD] p-6 rounded-2xl border border-[#E9D9C2] flex items-start space-x-3.5 shadow-sm"
+              className="bg-[#fde9ce] p-6 rounded-2xl border border-[#E9D9C2] flex items-start space-x-3.5 shadow-sm"
             >
               <ShieldCheck className="w-6 h-6 text-[#CC842F] shrink-0 mt-1" />
               <div>
@@ -109,7 +109,7 @@ export default function MenuPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-[#F5EBDD] p-6 rounded-2xl border border-[#E9D9C2] flex items-start space-x-3.5 shadow-sm"
+              className="bg-[#fde9ce] p-6 rounded-2xl border border-[#E9D9C2] flex items-start space-x-3.5 shadow-sm"
             >
               <CheckCircle2 className="w-6 h-6 text-[#CC842F] shrink-0 mt-1" />
               <div>
@@ -125,7 +125,7 @@ export default function MenuPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-[#F5EBDD] p-6 rounded-2xl border border-[#E9D9C2] flex items-start space-x-3.5 shadow-sm"
+              className="bg-[#fde9ce] p-6 rounded-2xl border border-[#E9D9C2] flex items-start space-x-3.5 shadow-sm"
             >
               <HeartHandshake className="w-6 h-6 text-[#CC842F] shrink-0 mt-1" />
               <div>

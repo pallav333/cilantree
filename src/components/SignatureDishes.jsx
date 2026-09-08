@@ -1,52 +1,53 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { signatureDishes } from '../data/menu';
 import { ArrowRight, Leaf, Flame } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function SignatureDishes() {
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start']
-  });
+  const videoRef = useRef(null);
+  const isVideoInView = useInView(videoRef, { amount: 0.35 });
 
-  const templeParallaxY = useTransform(scrollYProgress, [0, 1], ['-16px', '20px']);
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isVideoInView) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isVideoInView]);
 
   return (
-    <section ref={sectionRef} className="pt-8 md:pt-10 pb-16 md:pb-24 bg-[#F5EBDD] border-b border-[#E9D9C2]">
+    <section className="pt-8 md:pt-10 pb-16 md:pb-24 bg-[#fde9ce] border-b border-[#E9D9C2]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        {/* Header: Golden Temple + Menu Link on Left, Text Titles on Right */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 md:mb-12 gap-8">
-          {/* Left Column: Golden Temple on Top + View Menu Link Below */}
-          <div className="flex flex-col items-center lg:items-start gap-2.5 self-center lg:self-end order-2 lg:order-1">
-            {/* Golden Temple Architectural Illustration */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              style={{ y: templeParallaxY }}
-              className="w-full max-w-[260px] sm:max-w-[300px] md:max-w-[340px] lg:max-w-[380px] select-none pointer-events-none will-change-transform"
-            >
-              {/* GPU Ambient Levitation without JS tween collision */}
-              <div className="ambient-levitate relative w-full aspect-[3/2]">
-                <img
-                  src="/golden_temple.png"
-                  alt="Golden Temple Outline"
-                  loading="eager"
-                  className="w-full h-full object-contain mix-blend-multiply opacity-65 hover:opacity-85 transition-opacity duration-300 drop-shadow-[0_2px_10px_rgba(204,132,47,0.1)]"
-                />
-              </div>
-            </motion.div>
+        {/* Header: Charminar Video + Menu Link on Left, Text Titles on Right */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6 md:mb-8 gap-6">
+          {/* Left Column: Charminar Video on Top + View Menu Link Below - Centered */}
+          <div className="flex flex-col items-center gap-3 self-center order-2 lg:order-1">
+            {/* Charminar Architectural Video */}
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px] select-none">
+              <video
+                ref={videoRef}
+                src="/charminar.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="w-full h-auto object-contain block mx-auto"
+              />
+            </div>
 
             {/* Menu Link Positioned Below the Image */}
             <motion.div
-              initial={{ opacity: 0, x: -15 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="pt-1"
+              className="pt-0.5"
             >
               <Link
                 to="/menu"
@@ -66,7 +67,7 @@ export default function SignatureDishes() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-xl text-left lg:text-right order-1 lg:order-2"
           >
-            <div className="flex items-center space-x-3 mb-3 justify-start lg:justify-end">
+            <div className="flex items-center space-x-3 mb-2.5 justify-start lg:justify-end">
               <span className="text-xs font-bold tracking-[0.25em] text-[#CC842F] uppercase">
                 CURATED SELECTIONS
               </span>
@@ -81,7 +82,7 @@ export default function SignatureDishes() {
             <h2 className="font-serif section-heading font-bold text-[#CE4527]">
               SIGNATURE DISHES
             </h2>
-            <p className="text-[#29251F]/70 font-light text-base md:text-lg mt-2">
+            <p className="text-[#29251F]/70 font-light text-base md:text-lg mt-1.5">
               A few beloved favourites carefully crafted by our master culinary team.
             </p>
           </motion.div>

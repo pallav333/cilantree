@@ -9,7 +9,7 @@ import ReservationForm from '../components/ReservationForm';
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden bg-[#F5EBDD]">
+    <div className="relative overflow-hidden bg-[#fde9ce]">
       {/* Standard Sections in Natural Flow */}
       <MaharajaHero />
       <Hero />

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function GalleryPage() {
   return (
-    <main className="pt-28 pb-20 bg-[#F5EBDD] overflow-hidden">
+    <main className="pt-28 pb-20 bg-[#fde9ce] overflow-hidden">
       {/* Page Hero */}
       <section className="bg-[#242A33] bg-jali-pattern text-[#FAF3E8] py-20 md:py-28 relative overflow-hidden border-b border-[#333C48]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-end justify-between gap-8 relative z-10">

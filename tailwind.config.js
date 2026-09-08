@@ -17,7 +17,7 @@ export default {
           dark: '#172A22',
         },
         ivory: {
-          DEFAULT: '#F5EBDD',
+          DEFAULT: '#fde9ce',
           light: '#FAF3E8',
           white: '#FFFDF8',
         },

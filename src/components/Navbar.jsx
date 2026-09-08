@@ -168,7 +168,7 @@ export default function Navbar() {
                           <Link
                             to="/offerings#gift-cards"
                             onClick={() => setIsOfferingsOpen(false)}
-                            className="group/item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-[#F5EBDD] transition-colors"
+                            className="group/item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-[#fde9ce] transition-colors"
                           >
                             <div className="w-9 h-9 rounded-lg bg-[#CC842F]/15 flex items-center justify-center text-[#CC842F] group-hover/item:bg-[#CC842F] group-hover/item:text-[#FFFDF8] transition-colors shrink-0 mt-0.5">
                               <Gift className="w-4 h-4" />
@@ -192,7 +192,7 @@ export default function Navbar() {
                           <Link
                             to="/offerings#catering"
                             onClick={() => setIsOfferingsOpen(false)}
-                            className="group/item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-[#F5EBDD] transition-colors"
+                            className="group/item flex items-start space-x-3 p-2.5 rounded-xl hover:bg-[#fde9ce] transition-colors"
                           >
                             <div className="w-9 h-9 rounded-lg bg-[#CE4527]/15 flex items-center justify-center text-[#CE4527] group-hover/item:bg-[#CE4527] group-hover/item:text-[#FFFDF8] transition-colors shrink-0 mt-0.5">
                               <UtensilsCrossed className="w-4 h-4" />
@@ -217,7 +217,7 @@ export default function Navbar() {
                             <Link
                               to="/offerings"
                               onClick={() => setIsOfferingsOpen(false)}
-                              className="text-[10px] font-bold tracking-widest text-[#CC842F] hover:text-[#CE4527] flex items-center justify-between p-1.5 rounded-md hover:bg-[#F5EBDD] transition-colors uppercase"
+                              className="text-[10px] font-bold tracking-widest text-[#CC842F] hover:text-[#CE4527] flex items-center justify-between p-1.5 rounded-md hover:bg-[#fde9ce] transition-colors uppercase"
                             >
                               <span>Explore All Offerings</span>
                               <ArrowRight className="w-3.5 h-3.5" />

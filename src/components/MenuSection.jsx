@@ -22,7 +22,7 @@ export default function MenuSection({ limit, showHeader = true }) {
   const displayedItems = limit ? filteredItems.slice(0, limit) : filteredItems;
 
   return (
-    <section className="py-24 md:py-32 bg-[#F5EBDD]" id="menu-section">
+    <section className="py-24 md:py-32 bg-[#fde9ce]" id="menu-section">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {showHeader && (
           <motion.div

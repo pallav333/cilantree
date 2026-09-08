@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { locations } from '../data/locations';
 import { MapPin, Phone, Mail, Clock, Navigation, ExternalLink, Car } from 'lucide-react';
 
@@ -7,19 +7,26 @@ export default function LocationSection() {
   const [selectedLocId, setSelectedLocId] = useState(locations[0].id);
   const activeLoc = locations.find(l => l.id === selectedLocId);
 
-  const sectionRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start']
-  });
+  const videoRef = useRef(null);
+  const isVideoInView = useInView(videoRef, { amount: 0.35 });
 
-  const indiaGateParallaxY = useTransform(scrollYProgress, [0, 1], ['-16px', '20px']);
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isVideoInView) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isVideoInView]);
 
   return (
-    <section ref={sectionRef} className="pt-10 md:pt-14 pb-20 md:pb-28 bg-[#F5EBDD] border-b border-[#E9D9C2]">
+    <section className="pt-10 md:pt-14 pb-20 md:pb-28 bg-[#fde9ce] border-b border-[#E9D9C2]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        {/* Header with Title on Left and Animated India Gate on Right */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 md:mb-10">
+        {/* Header with Title on Left and Static India Gate Video on Right */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 md:mb-10">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -47,25 +54,19 @@ export default function LocationSection() {
             </p>
           </motion.div>
 
-          {/* India Gate Architectural Illustration */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            style={{ y: indiaGateParallaxY }}
-            className="w-full max-w-[240px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[360px] self-center lg:self-end select-none pointer-events-none will-change-transform"
-          >
-            {/* GPU Ambient Levitation without JS tween collision */}
-            <div className="ambient-levitate relative w-full aspect-[3/2]">
-              <img
-                src="/india_gate.png"
-                alt="India Gate Outline"
-                loading="eager"
-                className="w-full h-full object-contain mix-blend-multiply opacity-65 hover:opacity-85 transition-opacity duration-300 drop-shadow-[0_2px_10px_rgba(204,132,47,0.1)]"
-              />
-            </div>
-          </motion.div>
+          {/* India Gate Architectural Video */}
+          <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px] self-center select-none">
+            <video
+              ref={videoRef}
+              src="/india_gate.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="w-full h-auto object-contain block mx-auto"
+            />
+          </div>
         </div>
 
         {/* Location Selector Tabs */}

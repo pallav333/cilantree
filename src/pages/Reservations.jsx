@@ -5,7 +5,7 @@ import { Sparkles, Shirt, Users, Clock } from 'lucide-react';
 
 export default function ReservationsPage() {
   return (
-    <main className="pt-28 pb-20 bg-[#F5EBDD] overflow-hidden">
+    <main className="pt-28 pb-20 bg-[#fde9ce] overflow-hidden">
       {/* Page Hero */}
       <section className="bg-[#242A33] bg-jali-pattern text-[#FAF3E8] py-20 md:py-28 relative overflow-hidden border-b border-[#333C48]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -115,7 +115,7 @@ export default function ReservationsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                  className="bg-[#F5EBDD] p-8 rounded-2xl border border-[#E9D9C2] hover:border-[#CC842F] shadow-sm hover:shadow-xl transition-all duration-500 space-y-4 flex flex-col justify-between group"
+                  className="bg-[#fde9ce] p-8 rounded-2xl border border-[#E9D9C2] hover:border-[#CC842F] shadow-sm hover:shadow-xl transition-all duration-500 space-y-4 flex flex-col justify-between group"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
