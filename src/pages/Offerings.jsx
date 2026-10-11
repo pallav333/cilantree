@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import OptimizedVideo from '../components/OptimizedVideo';
 import { 
   Gift, 
   UtensilsCrossed, 
@@ -15,20 +16,6 @@ import {
 
 export default function Offerings() {
   const giftSectionRef = useRef(null);
-  const videoRef = useRef(null);
-  const isVideoInView = useInView(videoRef, { amount: 0.35 });
-
-  useEffect(() => {
-    if (!videoRef.current) return;
-    if (isVideoInView) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
-      }
-    } else {
-      videoRef.current.pause();
-    }
-  }, [isVideoInView]);
 
   const { scrollYProgress: giftScroll } = useScroll({
     target: giftSectionRef,
@@ -152,13 +139,8 @@ export default function Offerings() {
               {/* Golden Temple Architectural Heritage Video */}
               <div className="pt-2 flex flex-col items-center justify-center select-none w-full">
                 <div className="relative w-full max-w-[360px] sm:max-w-[420px]">
-                  <video
-                    ref={videoRef}
+                  <OptimizedVideo
                     src="/golden_temple.mp4"
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
                     className="w-full h-auto object-contain block mx-auto"
                   />
                 </div>

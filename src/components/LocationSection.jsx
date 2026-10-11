@@ -1,26 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { locations } from '../data/locations';
 import { MapPin, Phone, Mail, Clock, Navigation, ExternalLink, Car } from 'lucide-react';
+import OptimizedVideo from './OptimizedVideo';
 
 export default function LocationSection() {
   const [selectedLocId, setSelectedLocId] = useState(locations[0].id);
   const activeLoc = locations.find(l => l.id === selectedLocId);
-
-  const videoRef = useRef(null);
-  const isVideoInView = useInView(videoRef, { amount: 0.35 });
-
-  useEffect(() => {
-    if (!videoRef.current) return;
-    if (isVideoInView) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
-      }
-    } else {
-      videoRef.current.pause();
-    }
-  }, [isVideoInView]);
 
   return (
     <section className="pt-10 md:pt-14 pb-20 md:pb-28 bg-[#fde9ce] border-b border-[#E9D9C2]">
@@ -56,14 +42,8 @@ export default function LocationSection() {
 
           {/* India Gate Architectural Video */}
           <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px] self-center select-none">
-            <video
-              ref={videoRef}
+            <OptimizedVideo
               src="/india_gate.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
               className="w-full h-auto object-contain block mx-auto"
             />
           </div>

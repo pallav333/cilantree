@@ -1,25 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { signatureDishes } from '../data/menu';
 import { ArrowRight, Leaf, Flame } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import OptimizedVideo from './OptimizedVideo';
 
 export default function SignatureDishes() {
-  const videoRef = useRef(null);
-  const isVideoInView = useInView(videoRef, { amount: 0.35 });
-
-  useEffect(() => {
-    if (!videoRef.current) return;
-    if (isVideoInView) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
-      }
-    } else {
-      videoRef.current.pause();
-    }
-  }, [isVideoInView]);
-
   return (
     <section className="pt-8 md:pt-10 pb-16 md:pb-24 bg-[#fde9ce] border-b border-[#E9D9C2]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -29,14 +14,8 @@ export default function SignatureDishes() {
           <div className="flex flex-col items-center gap-3 self-center order-2 lg:order-1">
             {/* Charminar Architectural Video */}
             <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px] select-none">
-              <video
-                ref={videoRef}
+              <OptimizedVideo
                 src="/charminar.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
                 className="w-full h-auto object-contain block mx-auto"
               />
             </div>

@@ -42,7 +42,8 @@ export default {
         }
       },
       fontFamily: {
-        serif: ['Playfair Display', 'Cormorant Garamond', 'Georgia', 'serif'],
+        serif: ['"Almendra"', 'Georgia', 'serif'],
+        almendra: ['"Almendra"', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       }
     },

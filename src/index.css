@@ -1,3 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@font-face {
+  font-family: 'Almendra';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Almendra Regular'), local('Almendra-Regular'), local('Almendra'),
+       url('/fonts/Almendra-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Almendra';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Almendra Bold'), local('Almendra-Bold'),
+       url('/fonts/Almendra-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Almendra';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Almendra Italic'), local('Almendra-Italic'),
+       url('/fonts/Almendra-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Almendra';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Almendra Bold Italic'), local('Almendra-BoldItalic'),
+       url('/fonts/Almendra-BoldItalic.ttf') format('truetype');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -69,9 +107,40 @@
   h2,
   h3,
   h4,
+  h5,
+  h6,
+  .font-serif,
   .font-serif-heading {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Almendra', Georgia, serif;
     letter-spacing: -0.01em;
+  }
+
+  .almendra-regular {
+    font-family: "Almendra", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .almendra-bold {
+    font-family: "Almendra", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .almendra-regular-italic {
+    font-family: "Almendra", serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .almendra-bold-italic {
+    font-family: "Almendra", serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  .font-almendra {
+    font-family: 'Almendra', Georgia, serif;
   }
 }
 
@@ -145,3 +214,12 @@
   animation: gentleFloat 5.5s ease-in-out infinite;
   will-change: transform;
 }
+
+/* GPU Hardware Accelerated Media & Compositor Layers */
+video,
+.gpu-accelerated {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

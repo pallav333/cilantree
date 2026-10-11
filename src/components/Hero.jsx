@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Utensils, Award } from 'lucide-react';
+import OptimizedVideo from './OptimizedVideo';
 
 export default function Hero() {
   const sectionRef = useRef(null);
@@ -63,7 +64,7 @@ export default function Hero() {
             {/* Main Editorial Heading */}
             <motion.h1 
               variants={itemVariants} 
-              className="font-serif hero-heading font-bold text-[#CE4527] tracking-tight uppercase"
+              className="font-almendra hero-heading font-bold text-[#CE4527] tracking-tight uppercase"
             >
               AUTHENTIC<br />
               <span className="italic font-normal text-[#CC842F]">INDIAN</span><br />
@@ -124,12 +125,8 @@ export default function Hero() {
             <div className="relative mx-auto max-w-md lg:max-w-none">
               {/* Primary Hero Food Image */}
               <div className="overflow-hidden rounded-2xl shadow-2xl border-4 border-[#FAF3E8] bg-[#FAF3E8] aspect-[4/5] relative">
-                <video
+                <OptimizedVideo
                   src="/video.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
                   className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
                 />
               </div>

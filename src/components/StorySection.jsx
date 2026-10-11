@@ -1,7 +1,8 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import OptimizedVideo from './OptimizedVideo';
 
 export default function StorySection() {
   const sectionRef = useRef(null);
@@ -13,21 +14,6 @@ export default function StorySection() {
 
   const imageY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%']);
   const badgeY = useTransform(scrollYProgress, [0, 1], ['18px', '-18px']);
-
-  const videoRef = useRef(null);
-  const isVideoInView = useInView(videoRef, { amount: 0.35 });
-
-  useEffect(() => {
-    if (!videoRef.current) return;
-    if (isVideoInView) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
-      }
-    } else {
-      videoRef.current.pause();
-    }
-  }, [isVideoInView]);
 
   return (
     <section ref={sectionRef} className="pt-10 md:pt-16 pb-20 md:pb-28 bg-[#fde9ce] border-b border-[#E9D9C2] overflow-hidden">
@@ -58,7 +44,7 @@ export default function StorySection() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               >
-                <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-[#CE4527] leading-tight">
+                <h2 className="font-almendra text-3xl md:text-5xl lg:text-6xl font-bold text-[#CE4527] leading-tight">
                   A TASTE OF INDIA,<br />
                   <span className="italic font-normal text-[#CC842F]">CRAFTED WITH CARE.</span>
                 </h2>
@@ -128,14 +114,8 @@ export default function StorySection() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[380px] self-center select-none"
             >
-              <video
-                ref={videoRef}
+              <OptimizedVideo
                 src="/taj_mahal.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
                 className="w-full h-auto object-contain block mx-auto"
               />
             </motion.div>

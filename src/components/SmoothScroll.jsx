@@ -13,12 +13,12 @@ export default function SmoothScroll({ children }) {
     }
 
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.2,
     });
 
     // Expose lenis instance globally for scroll resets & smooth section anchors
@@ -32,7 +32,8 @@ export default function SmoothScroll({ children }) {
     };
 
     gsap.ticker.add(tickerCallback);
-    gsap.ticker.lagSmoothing(0);
+    // Enable GSAP lag smoothing to smoothly handle micro frame variations without jank
+    gsap.ticker.lagSmoothing(500, 33);
 
     return () => {
       gsap.ticker.remove(tickerCallback);
